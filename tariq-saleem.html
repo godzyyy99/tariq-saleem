@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tariq Saleem | طريق سليم — Safe Shuttle Booking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Noto+Kufi+Arabic:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-dark: #083d2a;
+    --green-mid:  #0f5c44;
+    --green-light:#1a7a5e;
+    --gold:       #d4a63c;
+    --gold-light: #f0c96a;
+    --cream:      #fef9f0;
+    --white:      #ffffff;
+    --gray-50:    #f9f8f6;
+    --gray-100:   #f0ede8;
+    --gray-200:   #ddd9d0;
+    --gray-400:   #9e9a92;
+    --gray-600:   #5e5a52;
+    --gray-800:   #2c2a26;
+    --red:        #c0392b;
+    --red-light:  #fdf0ef;
+    --green-success: #059669;
+    --green-success-light: #d1fae5;
+    --radius-sm:  8px;
+    --radius-md:  12px;
+    --radius-lg:  18px;
+    --radius-xl:  24px;
+    --shadow-sm:  0 1px 4px rgba(0,0,0,0.08);
+    --shadow-md:  0 4px 16px rgba(0,0,0,0.1);
+    --shadow-lg:  0 8px 32px rgba(0,0,0,0.14);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Sora', sans-serif;
+    background: var(--gray-50);
+    color: var(--gray-800);
+    min-height: 100vh;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    background: var(--green-dark);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-md);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-logo-icon svg { width: 22px; height: 22px; }
+  .nav-brand { display: flex; flex-direction: column; }
+  .nav-brand-en { color: #fff; font-size: 18px; font-weight: 700; line-height: 1.1; }
+  .nav-brand-ar { color: var(--gold); font-family: 'Noto Kufi Arabic', sans-serif; font-size: 12px; font-weight: 600; }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: #fff; }
+  .nav-cta {
+    background: var(--gold); color: var(--green-dark);
+    padding: 8px 20px; border-radius: 8px; font-size: 14px; font-weight: 700;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+  .nav-mobile-toggle { display: none; background: none; border: none; cursor: pointer; }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 55%, var(--green-light) 100%);
+    padding: 5rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 400px; height: 400px; border-radius: 50%;
+    border: 70px solid rgba(212,166,60,0.08); pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -60px; left: 5%;
+    width: 250px; height: 250px; border-radius: 50%;
+    border: 50px solid rgba(212,166,60,0.06); pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px; padding: 6px 16px;
+    color: var(--gold); font-size: 13px; font-weight: 600; margin-bottom: 1.5rem;
+  }
+  .pulse-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: #4ade80;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .hero h1 {
+    color: #fff; font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800; line-height: 1.15; margin-bottom: 1rem;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-sub {
+    color: rgba(255,255,255,0.72); font-size: 17px; line-height: 1.6;
+    margin-bottom: 2.5rem; max-width: 520px; margin-left: auto; margin-right: auto;
+  }
+  .hero-badges { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+  .hero-badge {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px; padding: 8px 18px;
+    color: #fff; font-size: 13px; font-weight: 500;
+  }
+  .hero-badge svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .hero-cta-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold); color: var(--green-dark);
+    padding: 14px 32px; border-radius: 10px; font-size: 16px; font-weight: 700;
+    border: none; cursor: pointer; font-family: 'Sora', sans-serif;
+    transition: all 0.2s; text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+  .btn-outline {
+    background: transparent; color: #fff;
+    padding: 14px 32px; border-radius: 10px; font-size: 16px; font-weight: 600;
+    border: 1.5px solid rgba(255,255,255,0.4); cursor: pointer; font-family: 'Sora', sans-serif;
+    transition: all 0.2s; text-decoration: none; display: inline-block;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.1); }
+
+  /* ─── STATS STRIP ─── */
+  .stats-strip {
+    background: var(--white); border-bottom: 1px solid var(--gray-200);
+    padding: 1.5rem 2rem;
+  }
+  .stats-inner {
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; text-align: center;
+  }
+  .stat-item {}
+  .stat-num { font-size: 28px; font-weight: 800; color: var(--green-mid); }
+  .stat-lbl { font-size: 13px; color: var(--gray-400); margin-top: 2px; }
+
+  /* ─── MAIN LAYOUT ─── */
+  .main { max-width: 900px; margin: 0 auto; padding: 3rem 1.5rem; }
+  .section-header { text-align: center; margin-bottom: 2.5rem; }
+  .section-tag {
+    display: inline-block; background: rgba(15,92,68,0.1); color: var(--green-mid);
+    font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 20px; margin-bottom: 0.75rem;
+  }
+  .section-header h2 { font-size: 28px; font-weight: 800; color: var(--gray-800); margin-bottom: 0.5rem; }
+  .section-header p { color: var(--gray-400); font-size: 15px; }
+
+  /* ─── BOOKING CARD ─── */
+  .booking-card {
+    background: var(--white); border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg); overflow: hidden; margin-bottom: 3rem;
+    border: 1px solid var(--gray-200);
+  }
+  .booking-header {
+    background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
+    padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between;
+  }
+  .booking-header-title { color: #fff; font-size: 18px; font-weight: 700; }
+  .booking-header-sub { color: rgba(255,255,255,0.65); font-size: 13px; margin-top: 2px; }
+  .booking-steps { display: flex; gap: 6px; }
+  .bstep {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.6);
+    transition: all 0.2s;
+  }
+  .bstep.done { background: var(--gold); color: var(--green-dark); }
+  .bstep.active { background: #fff; color: var(--green-mid); }
+  .booking-body { padding: 2rem; }
+
+  /* STEP LABELS */
+  .step-heading { font-size: 20px; font-weight: 700; color: var(--gray-800); margin-bottom: 0.35rem; }
+  .step-sub { font-size: 14px; color: var(--gray-400); margin-bottom: 1.5rem; }
+
+  /* ROUTE GRID */
+  .route-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+  @media(max-width:600px){ .route-grid { grid-template-columns: repeat(2, 1fr); } }
+  .route-btn {
+    border: 2px solid var(--gray-200); border-radius: var(--radius-md);
+    padding: 14px 12px; cursor: pointer; background: var(--white);
+    text-align: left; transition: all 0.18s; font-family: 'Sora', sans-serif;
+    position: relative;
+  }
+  .route-btn:hover { border-color: var(--green-mid); background: rgba(15,92,68,0.03); }
+  .route-btn.active { border-color: var(--green-mid); background: rgba(15,92,68,0.06); }
+  .route-btn.active::after {
+    content: '✓'; position: absolute; top: 8px; right: 10px;
+    width: 20px; height: 20px; background: var(--green-mid); color: #fff;
+    border-radius: 50%; font-size: 11px; display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+  }
+  .route-from { font-size: 11px; color: var(--gray-400); margin-bottom: 3px; }
+  .route-arrow { font-size: 10px; color: var(--gray-400); }
+  .route-to { font-size: 15px; font-weight: 700; color: var(--gray-800); margin-bottom: 8px; }
+  .route-price-tag {
+    background: #fef3c7; color: #92400e;
+    font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 6px;
+    display: inline-block;
+  }
+
+  /* TIME GRID */
+  .times-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+  @media(max-width:480px){ .times-grid { grid-template-columns: repeat(2, 1fr); } }
+  .time-btn {
+    border: 2px solid var(--gray-200); border-radius: var(--radius-md);
+    padding: 14px 8px; cursor: pointer; background: var(--white);
+    text-align: center; transition: all 0.18s; font-family: 'Sora', sans-serif;
+  }
+  .time-btn:hover { border-color: var(--green-mid); }
+  .time-btn.active { border-color: var(--green-mid); background: rgba(15,92,68,0.06); }
+  .time-main { font-size: 20px; font-weight: 800; color: var(--gray-800); }
+  .time-ampm { font-size: 12px; color: var(--gray-400); font-weight: 500; }
+  .time-avail { font-size: 11px; color: var(--green-success); font-weight: 600; margin-top: 4px; }
+  .time-avail.low { color: #d97706; }
+  .time-avail.none { color: var(--red); }
+
+  /* SHUTTLE CARDS */
+  .shuttle-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 1.5rem; }
+  .shuttle-card {
+    border: 2px solid var(--gray-200); border-radius: var(--radius-md);
+    padding: 16px; cursor: pointer; background: var(--white);
+    transition: all 0.18s; font-family: 'Sora', sans-serif;
+  }
+  .shuttle-card:hover:not(.full) { border-color: var(--green-mid); }
+  .shuttle-card.active { border-color: var(--green-mid); background: rgba(15,92,68,0.04); }
+  .shuttle-card.full { opacity: 0.55; cursor: not-allowed; border-style: dashed; }
+  .shuttle-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .shuttle-name-wrap { display: flex; align-items: center; gap: 10px; }
+  .shuttle-icon {
+    width: 36px; height: 36px; border-radius: 8px; background: var(--gray-100);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .shuttle-icon svg { width: 20px; height: 20px; }
+  .shuttle-name { font-size: 15px; font-weight: 700; color: var(--gray-800); }
+  .shuttle-seats-count { font-size: 12px; color: var(--gray-400); margin-top: 1px; }
+  .status-pill {
+    padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700;
+  }
+  .status-open { background: var(--green-success-light); color: #065f46; }
+  .status-full { background: var(--red-light); color: var(--red); }
+  .status-low  { background: #fef3c7; color: #92400e; }
+  .seat-track { display: flex; gap: 4px; flex-wrap: wrap; }
+  .seat-dot {
+    width: 16px; height: 16px; border-radius: 3px;
+    border: 1.5px solid var(--gray-200); background: transparent;
+    transition: all 0.12s;
+  }
+  .seat-dot.taken { background: var(--green-mid); border-color: var(--green-mid); }
+  .seat-dot.mine  { background: var(--gold); border-color: var(--gold); }
+
+  /* SEAT MAP */
+  .seat-map-wrap { margin-top: 1.5rem; background: var(--gray-50); border-radius: var(--radius-md); padding: 1.25rem; border: 1px solid var(--gray-200); }
+  .seat-map-label { font-size: 13px; font-weight: 600; color: var(--gray-600); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+  .seat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 1rem; }
+  .seat-big {
+    aspect-ratio: 1; border-radius: 8px; border: 2px solid var(--gray-200);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; color: var(--gray-400);
+    cursor: pointer; transition: all 0.15s; background: var(--white);
+    font-family: 'Sora', sans-serif;
+  }
+  .seat-big:hover:not(.taken):not(.mine) {
+    border-color: var(--green-mid); background: rgba(15,92,68,0.08); color: var(--green-mid);
+  }
+  .seat-big.taken { background: var(--green-mid); border-color: var(--green-mid); color: #fff; cursor: not-allowed; }
+  .seat-big.mine  { background: var(--gold); border-color: var(--gold); color: #fff; }
+  .seat-legend { display: flex; gap: 16px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--gray-600); }
+  .legend-swatch { width: 14px; height: 14px; border-radius: 3px; }
+
+  /* BUTTONS */
+  .action-row { display: flex; gap: 10px; align-items: center; }
+  .btn-back {
+    background: var(--white); border: 1.5px solid var(--gray-200);
+    border-radius: 10px; padding: 13px 20px; font-size: 15px; font-weight: 600;
+    cursor: pointer; font-family: 'Sora', sans-serif; color: var(--gray-600);
+    transition: all 0.15s;
+  }
+  .btn-back:hover { background: var(--gray-100); }
+  .btn-next {
+    flex: 1; background: var(--green-mid); color: #fff;
+    border: none; border-radius: 10px; padding: 15px 24px; font-size: 16px; font-weight: 700;
+    cursor: pointer; font-family: 'Sora', sans-serif; transition: all 0.2s;
+  }
+  .btn-next:hover:not(:disabled) { background: var(--green-dark); transform: translateY(-1px); }
+  .btn-next:disabled { background: var(--gray-200); color: var(--gray-400); cursor: not-allowed; transform: none; }
+  .btn-confirm {
+    width: 100%; background: var(--green-mid); color: #fff;
+    border: none; border-radius: 12px; padding: 18px; font-size: 17px; font-weight: 700;
+    cursor: pointer; font-family: 'Sora', sans-serif; transition: all 0.2s; margin-top: 1rem;
+  }
+  .btn-confirm:hover { background: var(--green-dark); }
+
+  /* CONFIRM SUMMARY */
+  .confirm-table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+  .confirm-table tr td { padding: 10px 0; border-bottom: 1px solid var(--gray-100); font-size: 14px; }
+  .confirm-table tr:last-child td { border: none; font-weight: 700; font-size: 16px; }
+  .confirm-table td:last-child { text-align: right; font-weight: 600; color: var(--gray-800); }
+  .confirm-table tr:last-child td:last-child { color: var(--green-mid); font-size: 18px; }
+  .confirm-label { color: var(--gray-400); font-weight: 400; }
+
+  /* GPS PANEL */
+  .gps-panel {
+    background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+    border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.5rem; color: #fff;
+  }
+  .gps-top { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+  .gps-icon-wrap {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: rgba(212,166,60,0.25); display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .gps-icon-wrap svg { width: 22px; height: 22px; }
+  .gps-title { font-size: 16px; font-weight: 700; }
+  .gps-sub { font-size: 13px; opacity: 0.65; margin-top: 2px; }
+  .gps-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  @media(max-width:480px){ .gps-stats { grid-template-columns: repeat(2, 1fr); } }
+  .gps-stat { background: rgba(255,255,255,0.1); border-radius: 10px; padding: 12px; }
+  .gps-val { font-size: 20px; font-weight: 800; color: var(--gold); }
+  .gps-lbl { font-size: 11px; opacity: 0.65; margin-top: 2px; }
+
+  /* SUCCESS SCREEN */
+  .success-wrap { text-align: center; padding: 2rem 0; }
+  .success-icon {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: var(--green-success-light); display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.25rem; font-size: 36px;
+  }
+  .success-title { font-size: 26px; font-weight: 800; color: var(--gray-800); margin-bottom: 0.5rem; }
+  .success-sub { font-size: 15px; color: var(--gray-400); margin-bottom: 1.5rem; }
+  .booking-ref-box {
+    display: inline-block; background: var(--gray-100); border: 1px solid var(--gray-200);
+    border-radius: 8px; padding: 8px 20px; font-family: monospace; font-size: 16px;
+    font-weight: 700; color: var(--green-mid); letter-spacing: 2px; margin-bottom: 1.5rem;
+  }
+  .success-details {
+    background: var(--gray-50); border-radius: var(--radius-md); padding: 1.25rem;
+    text-align: left; border: 1px solid var(--gray-200); margin-bottom: 1.5rem;
+  }
+  .detail-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--gray-100); font-size: 14px; }
+  .detail-row:last-child { border: none; }
+  .detail-label { color: var(--gray-400); }
+  .detail-val { font-weight: 600; }
+  .btn-again {
+    background: var(--green-mid); color: #fff;
+    border: none; border-radius: 10px; padding: 14px 32px; font-size: 16px; font-weight: 700;
+    cursor: pointer; font-family: 'Sora', sans-serif; transition: background 0.2s;
+  }
+  .btn-again:hover { background: var(--green-dark); }
+
+  /* FEATURES */
+  .features-section { margin-bottom: 3rem; }
+  .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  @media(max-width:600px){ .features-grid { grid-template-columns: 1fr; } }
+  .feat-card {
+    background: var(--white); border-radius: var(--radius-lg); padding: 1.5rem;
+    border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm);
+  }
+  .feat-icon-wrap {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: rgba(15,92,68,0.08); display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .feat-icon-wrap svg { width: 24px; height: 24px; color: var(--green-mid); }
+  .feat-title { font-size: 16px; font-weight: 700; color: var(--gray-800); margin-bottom: 6px; }
+  .feat-desc { font-size: 14px; color: var(--gray-400); line-height: 1.6; }
+
+  /* ROUTES INFO SECTION */
+  .routes-section { margin-bottom: 3rem; }
+  .routes-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media(max-width:700px){ .routes-info-grid { grid-template-columns: repeat(2,1fr); } }
+  @media(max-width:480px){ .routes-info-grid { grid-template-columns: 1fr; } }
+  .route-info-card {
+    background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-md);
+    padding: 1.25rem; box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .route-info-card::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 4px; background: var(--green-mid); border-radius: 4px 0 0 4px;
+  }
+  .ric-from { font-size: 12px; color: var(--gray-400); margin-bottom: 2px; }
+  .ric-arrow { font-size: 11px; color: var(--gray-400); }
+  .ric-to { font-size: 16px; font-weight: 700; color: var(--gray-800); margin-bottom: 8px; }
+  .ric-bottom { display: flex; align-items: center; justify-content: space-between; }
+  .ric-price { font-size: 18px; font-weight: 800; color: var(--green-mid); }
+  .ric-currency { font-size: 12px; color: var(--gray-400); font-weight: 400; }
+  .ric-seats { font-size: 11px; color: var(--gray-400); }
+
+  /* SCHEDULE TABLE */
+  .schedule-section { margin-bottom: 3rem; }
+  .schedule-table-wrap { background: var(--white); border-radius: var(--radius-lg); border: 1px solid var(--gray-200); overflow: hidden; box-shadow: var(--shadow-sm); }
+  .schedule-table { width: 100%; border-collapse: collapse; }
+  .schedule-table th { background: var(--green-dark); color: #fff; padding: 14px 20px; text-align: left; font-size: 13px; font-weight: 600; }
+  .schedule-table td { padding: 14px 20px; border-bottom: 1px solid var(--gray-100); font-size: 14px; }
+  .schedule-table tr:last-child td { border: none; }
+  .schedule-table tr:hover td { background: var(--gray-50); }
+  .time-cell { font-weight: 700; color: var(--gray-800); }
+  .shuttle-pill { display: inline-block; background: rgba(15,92,68,0.1); color: var(--green-mid); padding: 3px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; margin-right: 4px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--green-dark); color: rgba(255,255,255,0.7);
+    padding: 3rem 2rem 2rem; text-align: center;
+  }
+  .footer-logo { display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 1rem; }
+  .footer-brand-en { color: #fff; font-size: 20px; font-weight: 700; }
+  .footer-brand-ar { color: var(--gold); font-family: 'Noto Kufi Arabic', sans-serif; font-size: 14px; }
+  .footer-tagline { font-size: 14px; margin-bottom: 1.5rem; }
+  .footer-links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+  .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+  .footer-links a:hover { color: #fff; }
+  .footer-copy { font-size: 12px; opacity: 0.45; }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 2rem; right: 2rem; background: var(--gray-800); color: #fff;
+    padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 500;
+    box-shadow: var(--shadow-lg); transform: translateY(100px); opacity: 0;
+    transition: all 0.3s; z-index: 999;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* MOBILE NAV */
+  @media(max-width:700px){
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .nav-mobile-toggle { display: block; color: #fff; }
+    .stats-inner { grid-template-columns: repeat(2,1fr); }
+    .gps-stats { grid-template-columns: repeat(2,1fr); }
+    .booking-steps { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#0a3d2e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="3" width="15" height="13" rx="2"/>
+        <path d="M16 8h4l3 3v5h-7V8z"/>
+        <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+      </svg>
+    </div>
+    <div class="nav-brand">
+      <span class="nav-brand-en">Tariq Saleem</span>
+      <span class="nav-brand-ar">طريق سليم</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#booking">Book Now</a>
+    <a href="#routes">Routes</a>
+    <a href="#schedule">Schedule</a>
+    <a href="#features">Safety</a>
+  </div>
+  <a href="#booking" class="nav-cta">Book a Shuttle</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <div class="pulse-dot"></div>
+      Shuttles operating now
+    </div>
+    <h1>Cairo's <span>Safest</span> Shuttle Network</h1>
+    <p class="hero-sub">Fixed routes, guaranteed seats, real-time GPS tracking. Forget traffic stress — your shuttle runs on time, every time.</p>
+    <div class="hero-badges">
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+        Live GPS on every shuttle
+      </div>
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        13 seats max — no overcrowding
+      </div>
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Fixed departure times
+      </div>
+    </div>
+    <div class="hero-cta-group">
+      <a href="#booking" class="btn-primary">Book Your Seat Now</a>
+      <a href="#routes" class="btn-outline">View All Routes</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="stat-num">6</div><div class="stat-lbl">Active Routes</div></div>
+    <div class="stat-item"><div class="stat-num">6</div><div class="stat-lbl">Daily Departures</div></div>
+    <div class="stat-item"><div class="stat-num">13</div><div class="stat-lbl">Seats Per Shuttle</div></div>
+    <div class="stat-item"><div class="stat-num">10–25</div><div class="stat-lbl">EGP Fares</div></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- BOOKING CARD -->
+  <div id="booking" class="booking-card">
+    <div class="booking-header">
+      <div>
+        <div class="booking-header-title">Book Your Shuttle</div>
+        <div class="booking-header-sub">Select route, time, and seat in 4 easy steps</div>
+      </div>
+      <div class="booking-steps">
+        <div class="bstep" id="bstep-1">1</div>
+        <div class="bstep" id="bstep-2">2</div>
+        <div class="bstep" id="bstep-3">3</div>
+        <div class="bstep" id="bstep-4">4</div>
+      </div>
+    </div>
+    <div class="booking-body" id="booking-body">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+
+  <!-- ROUTES -->
+  <div id="routes" class="routes-section">
+    <div class="section-header">
+      <div class="section-tag">Our Routes</div>
+      <h2>Where We Go</h2>
+      <p>Fixed routes with predictable paths and guaranteed arrival times</p>
+    </div>
+    <div class="routes-info-grid" id="routes-info-grid"></div>
+  </div>
+
+  <!-- SCHEDULE -->
+  <div id="schedule" class="schedule-section">
+    <div class="section-header">
+      <div class="section-tag">Daily Schedule</div>
+      <h2>Fixed Departure Times</h2>
+      <p>Every route runs at these times daily — 3 shuttles per slot, 13 seats each</p>
+    </div>
+    <div class="schedule-table-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>Departure Time</th>
+            <th>Shuttles Available</th>
+            <th>Seats Per Shuttle</th>
+            <th>Max Passengers</th>
+          </tr>
+        </thead>
+        <tbody id="schedule-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div id="features" class="features-section">
+    <div class="section-header">
+      <div class="section-tag">Safety First</div>
+      <h2>Why Riders Choose Tariq Saleem</h2>
+      <p>Every detail is designed around your safety and comfort</p>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="9" stroke-dasharray="3 2"/></svg>
+        </div>
+        <div class="feat-title">Real-Time GPS Tracking</div>
+        <div class="feat-desc">Every shuttle carries a live GPS unit. Share your ride link with family or friends and let them track you door to door.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="feat-title">13 Seats Maximum</div>
+        <div class="feat-desc">We hard-cap every shuttle at 13 passengers. When full, the next shuttle automatically opens — no overbooking, ever.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="feat-title">Punctual Fixed Schedules</div>
+        <div class="feat-desc">Shuttles depart at 8, 9, 10, 11 AM and 12, 1 PM sharp — every single day. Plan your commute with total certainty.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="feat-title">Verified & Trained Drivers</div>
+        <div class="feat-desc">All drivers pass background checks, defensive driving training, and regular safety assessments. Your safety is non-negotiable.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div style="width:36px;height:36px;border-radius:8px;background:var(--gold);display:flex;align-items:center;justify-content:center;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0a3d2e" stroke-width="2.5" stroke-linecap="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+    </div>
+    <div>
+      <div class="footer-brand-en">Tariq Saleem</div>
+      <div class="footer-brand-ar">طريق سليم</div>
+    </div>
+  </div>
+  <div class="footer-tagline">Safe Routes. Fixed Times. Guaranteed Seats.</div>
+  <div class="footer-links">
+    <a href="#booking">Book Now</a>
+    <a href="#routes">Routes</a>
+    <a href="#schedule">Schedule</a>
+    <a href="#features">Safety</a>
+  </div>
+  <div class="footer-copy">© 2025 Tariq Saleem Transportation. All rights reserved.</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── DATA ──────────────────────────────────────────────
+  const ROUTES = [
+    { id:'r1', from:'Cairo', to:'Nasr City',      price:15 },
+    { id:'r2', from:'Cairo', to:'Maadi',          price:12 },
+    { id:'r3', from:'Cairo', to:'Heliopolis',     price:10 },
+    { id:'r4', from:'Cairo', to:'6th of October', price:25 },
+    { id:'r5', from:'Cairo', to:'New Cairo',      price:20 },
+    { id:'r6', from:'Cairo', to:'Dokki',          price:12 },
+  ];
+  const TIMES = ['8:00 AM','9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM'];
+  const SHUTTLE_NAMES = ['Shuttle A','Shuttle B','Shuttle C'];
+  const MAX_SEATS = 13;
+
+  // ── STATE ─────────────────────────────────────────────
+  let state = {
+    step: 1,
+    route: null,
+    time: null,
+    shuttle: null,
+    selectedSeats: [],
+    confirmed: false,
+    bookingRef: null,
+  };
+
+  // ── STORAGE ───────────────────────────────────────────
+  function loadBookings() {
+    try { return JSON.parse(localStorage.getItem('ts_bookings_v2') || '{}'); }
+    catch(e) { return {}; }
+  }
+  function saveBookings(b) {
+    try { localStorage.setItem('ts_bookings_v2', JSON.stringify(b)); } catch(e){}
+  }
+  let bookings = loadBookings();
+
+  function key(routeId, time, idx) { return `${routeId}||${time}||${idx}`; }
+  function getSeats(routeId, time, idx) { return bookings[key(routeId, time, idx)] || []; }
+  function countAvail(routeId, time) {
+    let total = 0;
+    for(let i=0;i<3;i++) { const t=getSeats(routeId,time,i).length; if(t<MAX_SEATS) total+=(MAX_SEATS-t); }
+    return total;
+  }
+
+  // ── TOAST ─────────────────────────────────────────────
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'), 2800);
+  }
+
+  // ── RENDER STEPS ──────────────────────────────────────
+  function updateStepIndicators() {
+    for(let i=1;i<=4;i++){
+      const el = document.getElementById('bstep-'+i);
+      if(!el) continue;
+      el.className = 'bstep' + (i<state.step?' done':i===state.step?' active':'');
+      el.textContent = i < state.step ? '✓' : i;
+    }
+  }
+
+  function render() {
+    updateStepIndicators();
+    const body = document.getElementById('booking-body');
+    if(!body) return;
+    if(state.confirmed) { body.innerHTML = renderSuccess(); startGPS(); return; }
+    if(state.step===1) body.innerHTML = renderStep1();
+    else if(state.step===2) body.innerHTML = renderStep2();
+    else if(state.step===3) body.innerHTML = renderStep3();
+    else if(state.step===4) body.innerHTML = renderStep4();
+  }
+
+  function renderStep1() {
+    let html = `<h3 class="step-heading">Choose your route</h3>
+    <p class="step-sub">Select your destination — fares are fixed and transparent</p>
+    <div class="route-grid">`;
+    ROUTES.forEach(r => {
+      const a = state.route && state.route.id===r.id ? 'active' : '';
+      html += `<button class="route-btn ${a}" onclick="selectRoute('${r.id}')">
+        <div class="route-from">${r.from} <span class="route-arrow">→</span></div>
+        <div class="route-to">${r.to}</div>
+        <div class="route-price-tag">${r.price} EGP</div>
+      </button>`;
+    });
+    html += `</div>
+    <div class="action-row">
+      <button class="btn-next" onclick="goStep(2)" ${!state.route?'disabled':''}>
+        Continue to time selection →
+      </button>
+    </div>`;
+    return html;
+  }
+
+  function renderStep2() {
+    const r = state.route;
+    let html = `<h3 class="step-heading">Pick a departure time</h3>
+    <p class="step-sub">${r.from} → ${r.to} · ${r.price} EGP per seat</p>
+    <div class="times-grid">`;
+    TIMES.forEach(t => {
+      const avail = countAvail(r.id, t);
+      const a = state.time===t ? 'active' : '';
+      const [hm,ampm] = t.split(' ');
+      const cls = avail===0?'none':avail<=6?'low':'';
+      const label = avail===0 ? 'Fully booked' : avail<=6 ? `${avail} seats left` : `${avail} seats available`;
+      html += `<button class="time-btn ${a}" onclick="selectTime('${t}')">
+        <div class="time-main">${hm}</div>
+        <div class="time-ampm">${ampm}</div>
+        <div class="time-avail ${cls}">${label}</div>
+      </button>`;
+    });
+    html += `</div>
+    <div class="action-row">
+      <button class="btn-back" onclick="goStep(1)">← Back</button>
+      <button class="btn-next" onclick="goStep(3)" ${!state.time?'disabled':''}>
+        Continue to shuttle selection →
+      </button>
+    </div>`;
+    return html;
+  }
+
+  function renderStep3() {
+    const r = state.route;
+    let html = `<h3 class="step-heading">Select a shuttle & seat</h3>
+    <p class="step-sub">${r.from} → ${r.to} · ${state.time} · ${r.price} EGP</p>
+    <div class="shuttle-list">`;
+    SHUTTLE_NAMES.forEach((name, i) => {
+      const taken = getSeats(r.id, state.time, i);
+      const full = taken.length >= MAX_SEATS;
+      const low = taken.length >= 8 && !full;
+      const isActive = state.shuttle === i;
+      const statusCls = full?'status-full':low?'status-low':'status-open';
+      const statusText = full?'Full':low?'Almost Full':'Open';
+      html += `<div class="shuttle-card ${full?'full':''} ${isActive&&!full?'active':''}" 
+        ${!full?`onclick="selectShuttle(${i})"`:''}>
+        <div class="shuttle-row">
+          <div class="shuttle-name-wrap">
+            <div class="shuttle-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#5e5a52" stroke-width="2" stroke-linecap="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            </div>
+            <div>
+              <div class="shuttle-name">${name}</div>
+              <div class="shuttle-seats-count">${taken.length}/${MAX_SEATS} seats taken</div>
+            </div>
+          </div>
+          <div class="status-pill ${statusCls}">${statusText}</div>
+        </div>
+        <div class="seat-track">`;
+      for(let s=1;s<=MAX_SEATS;s++){
+        const isMine = isActive && state.selectedSeats.includes(s);
+        const isTaken = taken.includes(s);
+        html += `<div class="seat-dot ${isMine?'mine':isTaken?'taken':''}"></div>`;
+      }
+      html += `</div></div>`;
+    });
+    html += `</div>`;
+
+    if(state.shuttle !== null) {
+      const taken = getSeats(r.id, state.time, state.shuttle);
+      html += `<div class="seat-map-wrap">
+        <div class="seat-map-label">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          Tap a seat to select it — ${SHUTTLE_NAMES[state.shuttle]}
+        </div>
+        <div class="seat-grid">`;
+      for(let s=1;s<=MAX_SEATS;s++){
+        const isMine = state.selectedSeats.includes(s);
+        const isTaken = taken.includes(s);
+        const cls = isMine?'mine':isTaken?'taken':'';
+        html += `<button class="seat-big ${cls}" onclick="toggleSeat(${s})" ${isTaken?'disabled':''}>${s}</button>`;
+      }
+      html += `</div>
+        <div class="seat-legend">
+          <div class="legend-item"><div class="legend-swatch" style="background:var(--white);border:2px solid var(--gray-200)"></div> Available</div>
+          <div class="legend-item"><div class="legend-swatch" style="background:var(--green-mid)"></div> Taken</div>
+          <div class="legend-item"><div class="legend-swatch" style="background:var(--gold)"></div> Your seat</div>
+        </div>
+      </div>`;
+    }
+
+    html += `<div class="action-row" style="margin-top:1.5rem">
+      <button class="btn-back" onclick="goStep(2)">← Back</button>
+      <button class="btn-next" onclick="goStep(4)" ${state.selectedSeats.length===0?'disabled':''}>
+        ${state.selectedSeats.length > 0 ? `Seat ${state.selectedSeats.join(', ')} selected →` : 'Select a seat to continue'}
+      </button>
+    </div>`;
+    return html;
+  }
+
+  function renderStep4() {
+    const r = state.route;
+    const seats = state.selectedSeats;
+    const total = r.price * seats.length;
+    return `<h3 class="step-heading">Confirm your booking</h3>
+    <p class="step-sub">Review your details before confirming</p>
+    <div class="gps-panel">
+      <div class="gps-top">
+        <div class="gps-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#d4a63c" stroke-width="2.5" stroke-linecap="round">
+            <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+            <circle cx="12" cy="12" r="9" stroke-dasharray="3 2"/>
+          </svg>
+        </div>
+        <div>
+          <div class="gps-title">GPS Safety Tracker Included</div>
+          <div class="gps-sub">Your ride is monitored in real-time from departure to arrival</div>
+        </div>
+      </div>
+      <div class="gps-stats">
+        <div class="gps-stat"><div class="gps-val">Live</div><div class="gps-lbl">GPS status</div></div>
+        <div class="gps-stat"><div class="gps-val">24/7</div><div class="gps-lbl">Monitoring</div></div>
+        <div class="gps-stat"><div class="gps-val">${MAX_SEATS}</div><div class="gps-lbl">Max seats</div></div>
+        <div class="gps-stat"><div class="gps-val">100%</div><div class="gps-lbl">Verified</div></div>
+      </div>
+    </div>
+    <table class="confirm-table">
+      <tr><td class="confirm-label">Route</td><td>${r.from} → ${r.to}</td></tr>
+      <tr><td class="confirm-label">Departure</td><td>${state.time}</td></tr>
+      <tr><td class="confirm-label">Shuttle</td><td>${SHUTTLE_NAMES[state.shuttle]}</td></tr>
+      <tr><td class="confirm-label">Seat number(s)</td><td>${seats.join(', ')}</td></tr>
+      <tr><td class="confirm-label">Price per seat</td><td>${r.price} EGP</td></tr>
+      <tr><td>Total to pay</td><td>${total} EGP</td></tr>
+    </table>
+    <div class="action-row">
+      <button class="btn-back" onclick="goStep(3)">← Back</button>
+      <button class="btn-confirm" onclick="confirmBooking()">✓ Confirm Booking — ${total} EGP</button>
+    </div>`;
+  }
+
+  function renderSuccess() {
+    const r = state.route;
+    const seats = state.selectedSeats;
+    return `<div class="success-wrap">
+      <div class="success-icon">✅</div>
+      <div class="success-title">Booking Confirmed!</div>
+      <div class="success-sub">Your seat is reserved. See you at departure!</div>
+      <div class="booking-ref-box">${state.bookingRef}</div>
+      <div class="success-details">
+        <div class="detail-row"><span class="detail-label">Route</span><span class="detail-val">${r.from} → ${r.to}</span></div>
+        <div class="detail-row"><span class="detail-label">Departure</span><span class="detail-val">${state.time}</span></div>
+        <div class="detail-row"><span class="detail-label">Shuttle</span><span class="detail-val">${SHUTTLE_NAMES[state.shuttle]}</span></div>
+        <div class="detail-row"><span class="detail-label">Seat(s)</span><span class="detail-val">No. ${seats.join(', ')}</span></div>
+        <div class="detail-row"><span class="detail-label">Amount paid</span><span class="detail-val" style="color:var(--green-mid)">${r.price*seats.length} EGP</span></div>
+      </div>
+      <div class="gps-panel" style="text-align:left">
+        <div class="gps-top">
+          <div class="gps-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#d4a63c" stroke-width="2.5" stroke-linecap="round">
+              <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+            </svg>
+          </div>
+          <div><div class="gps-title">Your shuttle is being tracked</div><div class="gps-sub">Live data updates every 5 seconds</div></div>
+        </div>
+        <div class="gps-stats">
+          <div class="gps-stat"><div class="gps-val" id="gps-speed">—</div><div class="gps-lbl">Speed (km/h)</div></div>
+          <div class="gps-stat"><div class="gps-val" id="gps-eta">—</div><div class="gps-lbl">ETA (mins)</div></div>
+          <div class="gps-stat"><div class="gps-val" style="color:#4ade80">●</div><div class="gps-lbl">En route</div></div>
+          <div class="gps-stat"><div class="gps-val">TS-A1</div><div class="gps-lbl">Driver ID</div></div>
+        </div>
+      </div>
+      <button class="btn-again" onclick="resetApp()">Book Another Ride</button>
+    </div>`;
+  }
+
+  // ── ACTIONS ───────────────────────────────────────────
+  function selectRoute(id) {
+    state.route = ROUTES.find(r=>r.id===id);
+    state.time = null; state.shuttle = null; state.selectedSeats = [];
+    render();
+  }
+  function selectTime(t) {
+    state.time = t; state.shuttle = null; state.selectedSeats = [];
+    render();
+  }
+  function selectShuttle(i) {
+    const taken = getSeats(state.route.id, state.time, i);
+    if(taken.length >= MAX_SEATS) return;
+    state.shuttle = i; state.selectedSeats = [];
+    render();
+  }
+  function toggleSeat(s) {
+    const taken = getSeats(state.route.id, state.time, state.shuttle);
+    if(taken.includes(s)) return;
+    const idx = state.selectedSeats.indexOf(s);
+    if(idx >= 0) state.selectedSeats.splice(idx, 1);
+    else state.selectedSeats.push(s);
+    render();
+  }
+  function goStep(n) {
+    state.step = n;
+    if(n===3) state.selectedSeats = [];
+    render();
+    document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function confirmBooking() {
+    const k = key(state.route.id, state.time, state.shuttle);
+    if(!bookings[k]) bookings[k] = [];
+    state.selectedSeats.forEach(s=>{ if(!bookings[k].includes(s)) bookings[k].push(s); });
+    saveBookings(bookings);
+    state.bookingRef = 'TS-' + Math.random().toString(36).substring(2,8).toUpperCase();
+    state.confirmed = true;
+    state.step = 5;
+    updateStepIndicators();
+    render();
+    showToast('🎉 Booking confirmed! Reference: ' + state.bookingRef);
+  }
+  function resetApp() {
+    state = {step:1, route:null, time:null, shuttle:null, selectedSeats:[], confirmed:false, bookingRef:null};
+    render();
+    document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  // ── GPS SIMULATION ────────────────────────────────────
+  let gpsInterval = null;
+  function startGPS() {
+    if(gpsInterval) clearInterval(gpsInterval);
+    let eta = 20;
+    function tick(){
+      const speed = Math.round(25 + Math.random()*65);
+      eta = Math.max(0, eta - 1);
+      const sv = document.getElementById('gps-speed');
+      const ev = document.getElementById('gps-eta');
+      if(sv) sv.textContent = speed;
+      if(ev) ev.textContent = eta > 0 ? eta : '🏁 Arrived';
+      if(eta === 0) clearInterval(gpsInterval);
+    }
+    tick();
+    gpsInterval = setInterval(tick, 3000);
+  }
+
+  // ── RENDER STATIC SECTIONS ────────────────────────────
+  function renderRoutesInfo() {
+    const g = document.getElementById('routes-info-grid');
+    if(!g) return;
+    g.innerHTML = ROUTES.map(r=>`
+      <div class="route-info-card">
+        <div class="ric-from">${r.from} <span class="ric-arrow">→</span></div>
+        <div class="ric-to">${r.to}</div>
+        <div class="ric-bottom">
+          <div><span class="ric-price">${r.price}</span> <span class="ric-currency">EGP</span></div>
+          <div class="ric-seats">13 seats/shuttle</div>
+        </div>
+      </div>`).join('');
+  }
+
+  function renderSchedule() {
+    const tb = document.getElementById('schedule-tbody');
+    if(!tb) return;
+    tb.innerHTML = TIMES.map(t=>`
+      <tr>
+        <td class="time-cell">${t}</td>
+        <td>
+          <span class="shuttle-pill">Shuttle A</span>
+          <span class="shuttle-pill">Shuttle B</span>
+          <span class="shuttle-pill">Shuttle C</span>
+        </td>
+        <td>13 seats</td>
+        <td>Up to 39 passengers</td>
+      </tr>`).join('');
+  }
+
+  // ── INIT ──────────────────────────────────────────────
+  render();
+  renderRoutesInfo();
+  renderSchedule();
+</script>
+</body>
+</html>
